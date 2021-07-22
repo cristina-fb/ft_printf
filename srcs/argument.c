@@ -49,7 +49,7 @@ t_flags	get_arg(va_list args, char c, t_flags var)
 
 t_flags	get_arg_str(va_list args, const char *fmt, t_flags var)
 {
-	while (!is_type(*fmt) && is_flag(*fmt))
+	while (is_flag(*fmt))
 	{
 		if (*fmt == '-')
 			var.f_hyp = 1;
@@ -66,6 +66,8 @@ t_flags	get_arg_str(va_list args, const char *fmt, t_flags var)
 			var = flag_space(fmt, var);
 		else if (*fmt == '#')
 			var.f_sharp = 1;
+		else if (is_type(*fmt))
+			break ;
 		fmt = fmt + find_next_flag(fmt);
 	}
 	var.type = *fmt;

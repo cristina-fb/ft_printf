@@ -73,26 +73,31 @@ char	*add_precision(t_flags var)
 
 t_flags	evaluate_flags(t_flags var)
 {
+	if (!is_type(var.type))
+		return(var);
 	if (var.type != 'p' && var.type != 'c' && var.f_prec)
 		var.val = add_precision(var);
-	if (var.f_zero && !var.f_prec && var.zero > ((int)ft_strlen(var.val) + var.n_null + (var.f_plus || var.sp)) && !var.f_hyp)
-		var.val = add_char(var, var.zero - ft_strlen(var.val) - var.n_null - (var.f_plus || var.sp), '0', 0);
-	else if (var.f_zero && !var.f_prec && var.zero > ((int)ft_strlen(var.val) + var.n_null + (var.f_plus || var.sp)) && var.f_hyp)
-		var.val = add_char(var, var.zero - ft_strlen(var.val) - var.n_null - (var.f_plus || var.sp), ' ', 1);
+	if (var.f_zero && !var.f_prec && var.zero > ((int)ft_strlen(var.val) + var.n_null + (var.f_plus || var.f_sp)) && !var.f_hyp)
+	{
+		if (var.f_sharp)
+			var.zero -= 2;
+		var.val = add_char(var, var.zero - ft_strlen(var.val) - var.n_null - (var.f_plus || var.f_sp), '0', 0);
+	}
+	else if (var.f_zero && !var.f_prec && var.zero > ((int)ft_strlen(var.val) + var.n_null + var.f_plus) && var.f_hyp)
+		var.val = add_char(var, var.zero - ft_strlen(var.val) - var.n_null - var.f_plus, ' ', 1);
 	var.val = add_sharp(var);
 	var.val = write_sign(var);
-	if (var.f_zero && (var.zero * -1) > ((int)ft_strlen(var.val) + var.n_null + var.sp))
-		var.val = add_char(var, (var.zero * -1) - ft_strlen(var.val) - var.n_null - var.sp, ' ', 1);
-	else if (var.f_zero && var.f_prec && var.zero > ((int)ft_strlen(var.val) + var.n_null - (var.f_plus || var.sp)))
-		var.val = add_char(var, var.zero - ft_strlen(var.val) - var.n_null - (var.f_plus || var.sp), ' ', var.f_hyp);
-	if (var.f_sp && (var.type == 'd' || var.type == 'i' || var.type == 's'))
+	if (var.f_sp)
 	{
-		printf("%d\n", var.sp);
-		if (var.sp > ((int)ft_strlen(var.val)))
+		if (var.sp > (int)ft_strlen(var.val))
 			var.val = add_char(var, var.sp - ft_strlen(var.val), ' ', 0);
 		else if (var.type != 's' && !var.f_plus)
 			var.val = add_char(var, 1, ' ', 0);
 	}
+	if (var.f_zero && (var.zero * -1) > ((int)ft_strlen(var.val) + var.n_null))
+		var.val = add_char(var, (var.zero * -1) - ft_strlen(var.val) - var.n_null, ' ', 1);
+	else if (var.f_zero && var.f_prec && var.zero > ((int)ft_strlen(var.val) + var.n_null))
+		var.val = add_char(var, var.zero - ft_strlen(var.val) - var.n_null, ' ', var.f_hyp);
 	if (var.f_width && var.width > ((int)ft_strlen(var.val) + var.n_null))
 		var.val = add_char(var, var.width - ft_strlen(var.val) - var.n_null, ' ', var.f_hyp);
 	return (var);

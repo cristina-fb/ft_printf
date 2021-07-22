@@ -2,12 +2,11 @@
 #include "srcs/ft_printf.h"
 int	main()
 {
-	char	*prueba;
-	int z = ft_printf("|% s|", "");
+	int z = ft_printf();
 	//hi low\0don't print me lol\0
 	//system("leaks a.out");
 	printf("\n");
-	int y = printf("|% s|", "");
+	/*int y = printf("%1$");
 	printf("\n");
-	printf("%d %d", z, y);
+	printf("%d %d", z, y);*/
 }
