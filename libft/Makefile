@@ -6,13 +6,17 @@
 #    By: crisfern <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/02 09:35:52 by crisfern          #+#    #+#              #
-#    Updated: 2021/06/30 09:42:36 by crisfern         ###   ########.fr        #
+#    Updated: 2021/07/25 12:57:18 by crisfern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+CC = gcc
+
 NAME = libft.a
 
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
+
+HEADER = libft.h
 
 SRC = ft_memset.c \
 		ft_bzero.c \
@@ -47,9 +51,7 @@ SRC = ft_memset.c \
 		ft_putchar_fd.c \
 		ft_putstr_fd.c \
 		ft_putendl_fd.c \
-		ft_putnbr_fd.c \
-		ft_itoh.c \
-		ft_litoh.c
+		ft_putnbr_fd.c
 
 SRC_BONUS = ft_lstnew.c \
 			ft_lstadd_front.c \
@@ -72,18 +74,11 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	ar -r $(NAME) $(OBJ)
 
-$(OBJ):
-	gcc $(FLAGS) -c $(SRC)
-
-
-
 bonus: $(OBJ_BONUS)
 	ar -r $(NAME) $(OBJ_BONUS)
 
-$(OBJ_BONUS):
-	gcc $(FLAGS) -c $(SRC_BONUS)
-
-
+%.o: %.c $(HEADER)
+	$(CC) $(CFLAGS) -c $<
 
 clean:
 	rm -f $(OBJ) $(OBJ_BONUS)

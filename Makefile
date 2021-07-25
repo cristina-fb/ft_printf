@@ -1,23 +1,34 @@
 CC = gcc
+
 NAME = libftprintf.a
-LIBFT = ./libft/libft.a
-LIBFT_DIR = ./libft
-FLAGS = -Wall -Werror -Wextra
-SRCS = srcs/ft_printf.c srcs/argument.c srcs/get_variable1.c srcs/get_variable2.c srcs/manage_flags.c srcs/save_flags.c
-OBJS = $(SRCS:.c:.o)
+
+HEADER = srcs/ft_printf.h
+
+LIBFT = libft.a
+
+LIBFT_DIR = libft/
+
+CFLAGS = -Wall -Werror -Wextra
+
+SRC = ft_printf.c argument.c get_variable1.c get_variable2.c manage_flags.c save_flags.c
+
+OBJ = $(SRC:.c=.o)
+
+
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	ar -r $(NAME) $(OBJS)
+$(NAME): make_libft	$(OBJ)
+	ar -r $(NAME) $(OBJ) $(LIBFT_DIR)$(LIBFT)
 
-$(OBJS):
+make_libft:
 	make -C $(LIBFT_DIR)
-	cp $(LIBFT) $(NAME)
-	$(CC) $(FLAGS) -c $(OBJS) $(SRCS)
+
+%.o: srcs/%.c $(HEADER)
+	$(CC) $(FLAGS) -c $<
 
 clean:
-	rm -rf $(OBJS)
+	rm -rf $(OBJ)
 	make clean -C $(LIBFT_DIR)
 
 fclean:	clean
