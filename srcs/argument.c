@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   argument.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: crisfern <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/26 13:37:58 by crisfern          #+#    #+#             */
+/*   Updated: 2021/07/26 13:38:02 by crisfern         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int	is_flag(char c)
@@ -49,7 +61,7 @@ t_flags	get_arg(va_list args, char c, t_flags var)
 
 t_flags	get_arg_str(va_list args, const char *fmt, t_flags var)
 {
-	while (is_flag(*fmt))
+	while (is_flag(*fmt) && *fmt)
 	{
 		if (*fmt == '-')
 			var.f_hyp = 1;
@@ -92,8 +104,8 @@ int	arg_len(const char *fmt, char *pos, va_list args, int len)
 		}
 		else if (var.n_null && !var.f_hyp)
 		{
-				write(1, var.val, ft_strlen(var.val));
-				write(1, "\0", 1);
+			write(1, var.val, ft_strlen(var.val));
+			write(1, "\0", 1);
 		}
 		else
 			write(1, var.val, ft_strlen(var.val));

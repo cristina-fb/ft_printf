@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: crisfern <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/26 13:45:52 by crisfern          #+#    #+#             */
+/*   Updated: 2021/07/26 13:45:54 by crisfern         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <unistd.h>
@@ -50,6 +62,6 @@ void	ft_lstdelone(t_list *lst, void (*del) (void *));
 void	ft_lstiter(t_list *lst, void (*f) (void *));
 void	ft_lstclear(t_list **lst, void (*del) (void *));
 char	*ft_itoh(unsigned int n);
-char    *ft_litoh(unsigned long n);
+char	*ft_litoh(unsigned long n);
 t_list	*ft_lstmap(t_list *lst, void *(*f) (void *), void (*del) (void *));
 #endif
