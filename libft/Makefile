@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: crisfern <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: crisfern <crisfern@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/02 09:35:52 by crisfern          #+#    #+#              #
-#    Updated: 2021/07/25 12:57:18 by crisfern         ###   ########.fr        #
+#    Updated: 2021/07/26 11:04:18 by crisfern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,9 @@ SRC = ft_memset.c \
 		ft_putchar_fd.c \
 		ft_putstr_fd.c \
 		ft_putendl_fd.c \
-		ft_putnbr_fd.c
+		ft_putnbr_fd.c \
+		ft_litoh.c \
+		ft_itoh.c
 
 SRC_BONUS = ft_lstnew.c \
 			ft_lstadd_front.c \

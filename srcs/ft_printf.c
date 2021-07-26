@@ -1,13 +1,5 @@
 #include "ft_printf.h"
 
-t_print	init_print_struct(void)
-{
-	t_print	print;
-
-	print.len = 0;
-	return (print);
-}
-
 int	is_type(char c)
 {
 	return ((c == 'c') || (c == 's') || (c == 'p') || (c == 'd') || (c == 'i')
@@ -31,10 +23,10 @@ const char	*find_type(const char *fmt)
 int	ft_printf(const char *fmt, ...)
 {
 	va_list	args;
-	t_print	print;
+	int		len;
 	char	*pos;
 
-	print = init_print_struct();
+	len = 0;
 	if (fmt)
 	{
 		va_start(args, fmt);
@@ -42,10 +34,10 @@ int	ft_printf(const char *fmt, ...)
 		{
 			pos = ft_strchr(fmt, '%');
 			if (pos)
-				print = arg_len(fmt, pos, args, print);
+				len = arg_len(fmt, pos, args, len);
 			else
 			{
-				print.len += ft_strlen(fmt);
+				len += ft_strlen(fmt);
 				write(1, fmt, ft_strlen(fmt));
 				break ;
 			}
@@ -53,5 +45,5 @@ int	ft_printf(const char *fmt, ...)
 		}
 		va_end(args);
 	}
-	return (print.len);
+	return (len);
 }

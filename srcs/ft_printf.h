@@ -2,7 +2,6 @@
 # define FT_PRINTF_H
 # include "../libft/libft.h"
 # include <limits.h>
-# include <stdio.h>
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -34,9 +33,8 @@ typedef struct s_print
 int			ft_printf(const char *fmt, ...);
 int			find_next_flag(const char *fmt);
 int			is_type(char c);
+int			arg_len(const char *fmt, char *pos, va_list args, int len);
 const char	*find_type(const char *fmt);
-t_print		init_print_struct(void);
-t_print		arg_len(const char *fmt, char *pos, va_list args, t_print print);
 t_flags		get_arg_str(va_list args, const char *fmt, t_flags var);
 t_flags		get_arg(va_list args, char c, t_flags var);
 t_flags		init_variable(void);

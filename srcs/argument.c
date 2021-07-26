@@ -75,12 +75,12 @@ t_flags	get_arg_str(va_list args, const char *fmt, t_flags var)
 	return (evaluate_flags(var));
 }
 
-t_print	arg_len(const char *fmt, char *pos, va_list args, t_print print)
+int	arg_len(const char *fmt, char *pos, va_list args, int len)
 {
 	t_flags	var;
 
 	write(1, fmt, pos - fmt);
-	print.len += pos - fmt;
+	len += pos - fmt;
 	var = init_variable();
 	var = get_arg_str(args, pos + 1, var);
 	if (var.val)
@@ -97,8 +97,8 @@ t_print	arg_len(const char *fmt, char *pos, va_list args, t_print print)
 		}
 		else
 			write(1, var.val, ft_strlen(var.val));
-		print.len += ft_strlen(var.val) + var.n_null;
+		len += ft_strlen(var.val) + var.n_null;
 		free(var.val);
 	}
-	return (print);
+	return (len);
 }
