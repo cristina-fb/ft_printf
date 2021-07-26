@@ -4,9 +4,9 @@ NAME = libftprintf.a
 
 HEADER = srcs/ft_printf.h
 
-LIBFT = libft.a
+LIBFT_DIR = ./libft/
 
-LIBFT_DIR = libft/
+LIBFT = libft.a
 
 CFLAGS = -Wall -Werror -Wextra
 
@@ -16,13 +16,14 @@ OBJ = $(SRC:.c=.o)
 
 
 
-all: $(NAME)
+all: make_libft $(NAME) 
 
-$(NAME): make_libft	$(OBJ)
-	ar -r $(NAME) $(OBJ) $(LIBFT_DIR)$(LIBFT)
+$(NAME): $(OBJ)
+	ar -r $(NAME) $(OBJ)
 
 make_libft:
 	make -C $(LIBFT_DIR)
+	@cp $(LIBFT_DIR)$(LIBFT) $(NAME)
 
 %.o: srcs/%.c $(HEADER)
 	$(CC) $(FLAGS) -c $<
@@ -39,4 +40,4 @@ bonus: all
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus make_libft
